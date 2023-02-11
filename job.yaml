@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kibana-backup
+spec:
+  template:
+    metadata:
+      name: kibana-backup
+    spec:
+      imagePullSecrets:
+        - name: hamdocker-hamravesh-auth
+      containers:
+      - name: kibana-backup
+        image: registry.hamdocker.ir/lintechso2/backup:v0.0.2
+        command:
+        - "python"
+        - "./backup.py"
+        env:
+          - name: KIBANA_URL
+            value: kibana.com  # kibana endpoint
+          - name: KIBANA_SPACE
+            value: default
+          - name: KIBANA_USERNAME
+            value: elastic    # elastic root user
+          - name: KIBANA_PASSWORD
+            value: test       # elastic root user
+          - name: AWS_ENDPOINT
+            value: s3.com   # s3 endpoint
+          - name: AWS_ACCESS_KEY
+            value: jesus
+          - name: AWS_ACCESS_PASSWORD
+            value: jesus
+          - name: AWS_BUCKET
+            value: mybucket  # bucket should be exist
+      restartPolicy: Never
