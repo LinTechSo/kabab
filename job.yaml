@@ -21,9 +21,9 @@ spec:
           - name: KIBANA_SPACE
             value: default
           - name: KIBANA_USERNAME
-            value: elastic    # elastic root pass
+            value: elastic    # elastic root user
           - name: KIBANA_PASSWORD
-            value: test       # elastic root user
+            value: test       # elastic root pass
           - name: AWS_ENDPOINT
             value: s3.com   # s3 endpoint
           - name: AWS_ACCESS_KEY
