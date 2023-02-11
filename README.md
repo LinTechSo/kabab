@@ -5,7 +5,7 @@ This simple script automate the process of exporting your kibana saved objects (
 
 Needs s3 credentials and your kibana credentials.
 
-Using kibana API below call request:
+Using kibana API call request:
 `POST <kibana host>:<port>/s/<space_id>/api/saved_objects/_export`
 
 you can run create docker image from Dockerfile and use the image in `job.yaml` k8s manifest to run this process as a kubernetes job
