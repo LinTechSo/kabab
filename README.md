@@ -3,9 +3,10 @@ kibana backup  (simple script for backup kibana saved objects)
 
 This simple script automate the process of exporting your kibana saved objects (includes index pattern, dashboards, etc) located at `Stack Management > Saved Objects.`
 
-needs s3 credentials and your kibana credentials.
+Needs s3 credentials and your kibana credentials.
 
-using kibana API below call request:
+Using kibana API below call request:
 `POST <kibana host>:<port>/s/<space_id>/api/saved_objects/_export`
 
+you can run create docker image from Dockerfile and use the image in `job.yaml` k8s manifest to run this process as a kubernetes job
 
