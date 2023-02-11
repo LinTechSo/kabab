@@ -1,7 +1,7 @@
 ## kabab
 kibana backup  (simple script for backup kibana saved objects)
 
-This simple script automate the process of exporting your kibana saved objects per space (include index pattern, dashboards, etc) located at `Stack Management > Saved Objects.`
+This simple script automate the process of exporting your kibana saved objects per space (include index pattern, dashboards, etc) located at `Stack Management > Saved Objects and upload them into the Minio S3 storage`
 
 Needs s3 credentials and your kibana credentials.
 
