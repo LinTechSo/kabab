@@ -1,7 +1,7 @@
 import json
 import base64
 import os
-import uuid
+import time
 import boto3
 import requests
 
@@ -33,18 +33,23 @@ def put_object(
         kibana_space
         ):
     
-    s3 = aws_connection(s3_endpoint, s3_access_key_id, s3_secret_access_key)
-    unique_filename = str(uuid.uuid4())
+    try:
+        s3 = aws_connection(s3_endpoint, s3_access_key_id, s3_secret_access_key)
+        str_date_time = time.strftime("%d-%m-%Y-%H-%M-%S")
+        
+        s3object = s3.Object(
+            f'{s3_bucket}', f'backup-{kibana_space}-{str_date_time}.ndjson'
+            )
     
-    s3object = s3.Object(
-        f'{s3_bucket}', f'backup-{unique_filename}-{kibana_space}.ndjson'
+        s3object.put(
+            Body=(eval(json.dumps(data)))
         )
+        
+        log.info(f'Backup from {kibana_space} on {str_date_time} has completed')
     
-    s3object.put(
-        Body=(eval(json.dumps(data)))
-    )
-
-    return True
+    except:
+        log.error(f'Backup from {kibana_space} on {str_date_time} has failed ')
+    
     
 def export(
         kibana_endpoint, 
@@ -80,16 +85,16 @@ def export(
 
     response = requests.request("POST", url, headers=headers, data=payload)
 
-    if put_object(response.text, 
+    put_object(response.text, 
                s3_endpoint, 
                s3_access_key_id,
                s3_secret_access_key,
                s3_bucket,
                kibana_space,
-               ) :
+               ) 
         
-        return_info = {"result": "succeed"}
-        return json.dumps(return_info)
+    return_info = {"Job": "Completed"}
+    return json.dumps(return_info)
 
 def logic():
     
