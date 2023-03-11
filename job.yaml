@@ -16,8 +16,8 @@ spec:
         - "python"
         - "./backup.py"
         env:
-          - name: KIBANA_URL
-            value: kibana.com  # kibana endpoint
+          - name: KIBANA_ENDPOINT
+            value: https://kibana.com  # kibana endpoint
           - name: KIBANA_SPACE
             value: default
           - name: KIBANA_USERNAME
@@ -25,7 +25,7 @@ spec:
           - name: KIBANA_PASSWORD
             value: test       # elastic root pass
           - name: AWS_ENDPOINT
-            value: s3.com   # s3 endpoint
+            value: https://s3.com   # s3 endpoint
           - name: AWS_ACCESS_KEY
             value: jesus
           - name: AWS_ACCESS_PASSWORD
